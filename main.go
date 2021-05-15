@@ -25,6 +25,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("Starting Rohans Website")
 
+	http.HandleFunc("/static/", http.FileServer(http.Dir("/static")))
 	http.HandleFunc("/", index)
 	err := http.ListenAndServe(":8001", nil)
 
