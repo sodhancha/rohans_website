@@ -9,7 +9,7 @@ import (
 //TODO
 /*
 * Make a webserver - DONE
-* Make a static file handler
+* Make a static file handler - DONE
 * Make a Routes handler
 * Make a DB Connector
 * Make a dynamic page which renders SQL output
