@@ -18,15 +18,15 @@ import (
 * Render the API first content in the dynamic web pages
  */
 
-func index(w ResponseWriter, r *Request) {
+func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "This is the home page for Rohans website")
 }
 
 func main() {
 	fmt.Println("Starting Rohans Website")
 
-	err := http.ListenAndServe("80801", nil)
 	http.HandleFunc("/", index)
+	err := http.ListenAndServe(":8001", nil)
 
 	if err != nil {
 		fmt.Println("Exited due to error", err)
