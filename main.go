@@ -28,7 +28,9 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./static"))
 
 	//not sure what the StripPrefix does. I think it removes the "/static" if static file of that folder is requested let me check
-	http.Handle("/static/", http.StripPrefix("/static", fileServer))
+	//http.Handle("/static/", http.StripPrefix("/static", fileServer))
+	http.Handle("/static/", fileServer) //now checking the same without the strip prefix
+
 	http.HandleFunc("/", index)
 	err := http.ListenAndServe(":8001", nil)
 
