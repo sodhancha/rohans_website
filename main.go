@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"os"
+)
 
 //TODO
 /*
@@ -14,6 +18,18 @@ import "fmt"
 * Render the API first content in the dynamic web pages
  */
 
+func index(w ResponseWriter, r *Request) {
+	fmt.Fprintf(w, "This is the home page for Rohans website")
+}
+
 func main() {
 	fmt.Println("Starting Rohans Website")
+
+	err := http.ListenAndServe("80801", nil)
+	http.HandleFunc("/", index)
+
+	if err != nil {
+		fmt.Println("Exited due to error", err)
+		os.Exit(0)
+	}
 }
