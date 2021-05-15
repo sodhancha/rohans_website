@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/sodhancha/rohans_website/router"
@@ -23,9 +22,10 @@ import (
  */
 
 func DBConnector() {
-	os.Remove("./foo.db")
 
 	db, err := sql.Open("sqlite3", "./DB/foo.db")
+	db.Exec("CREATE DATABASE rohans_database")
+
 	if err != nil {
 		log.Fatal(err)
 	}
