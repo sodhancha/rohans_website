@@ -8,7 +8,7 @@ import (
 
 //TODO
 /*
-* Make a webserver
+* Make a webserver - DONE
 * Make a static file handler
 * Make a Routes handler
 * Make a DB Connector
