@@ -24,11 +24,18 @@ import (
 func DBConnector() {
 
 	db, err := sql.Open("sqlite3", "./DB/foo.db")
-	db.Exec("CREATE DATABASE rohans_database")
-
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	sql_query := "SELECT * FROM books"
+
+	_, err = db.Query(sql_query)
+
+	if err != nil {
+		fmt.Println("Error in SQL exec: ", err)
+	}
+
 	defer db.Close()
 }
 
