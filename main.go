@@ -1,8 +1,12 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
+	"os"
 
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/sodhancha/rohans_website/router"
 )
 
@@ -18,9 +22,19 @@ import (
 * Render the API first content in the dynamic web pages
  */
 
+func DBConnector() {
+	os.Remove("./foo.db")
+
+	db, err := sql.Open("sqlite3", "./DB/foo.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+}
+
 func main() {
 	fmt.Println("Starting Rohans Website")
-
+	DBConnector()
 	//Remember that Go Lang requires exported functions to have Capital Case Names
 	router.RoutesHandler()
 	router.BuildServer()
