@@ -22,22 +22,31 @@ func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "This is the home page for Rohans website")
 }
 
-func main() {
-	fmt.Println("Starting Rohans Website")
+func routesHandler() {
 
 	fileServer := http.FileServer(http.Dir("./static"))
-
-	//not sure what the StripPrefix does. I think it removes the "/static" if static file of that folder is requested let me check
 	http.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-	//http.Handle("/static/", fileServer) //now checking the same without the strip prefix
-	//Without Strip Prefix doesnt seem to serve the static file at all
-
 	http.HandleFunc("/", index)
+}
+
+func buildServer() {
+
 	err := http.ListenAndServe(":8001", nil)
 
 	if err != nil {
 		fmt.Println("Exited due to error", err)
 		os.Exit(0)
 	}
+}
+
+func main() {
+	fmt.Println("Starting Rohans Website")
+
+	//not sure what the StripPrefix does. I think it removes the "/static" if static file of that folder is requested let me check
+
+	//http.Handle("/static/", fileServer) //now checking the same without the strip prefix
+	//Without Strip Prefix doesnt seem to serve the static file at all
+	routesHandler()
+	buildServer()
 }
