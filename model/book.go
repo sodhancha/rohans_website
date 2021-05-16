@@ -3,7 +3,6 @@ package model
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -15,27 +14,17 @@ type Book struct {
 	Price  float64
 }
 
-type Connect struct {
-	KTMDb *sql.DB
-}
-
-func GetAllBooks() {
-
-	db, err := sql.Open("sqlite3", "./DB/foo.db")
-
-	if err != nil {
-		log.Fatal(err)
-	}
+func GetAllBooks(DB *sql.DB) {
 
 	sql_query := "SELECT * FROM books"
 
-	rows, err := db.Query(sql_query)
+	rows, err := DB.Query(sql_query)
 
 	if err != nil {
 		fmt.Println("Error in SQL exec: ", err)
 	}
 
-	defer db.Close()
+	defer DB.Close()
 
 	for rows.Next() {
 
