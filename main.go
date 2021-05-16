@@ -14,7 +14,7 @@ import (
 * Make a webserver - DONE
 * Make a static file handler - DONE
 * Make a Routes handler - DONE
-* Make a DB Connector
+* Make a DB Connector - DONE
 * Make a dynamic page which renders SQL output
 * Make an admin panel where the dynamic content can be updated from
 * Build a RESTFul API for the Backend Content
