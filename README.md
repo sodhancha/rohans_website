@@ -17,3 +17,7 @@
   7. Build a RESTFul API for the Backend Content
 
   8. Render the API first content in the dynamic web pages
+
+
+# References:
+[Go Lang Website](https://golang.org/)
