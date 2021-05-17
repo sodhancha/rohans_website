@@ -4,10 +4,22 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"text/template"
 )
+
+type HomePageData struct {
+	Title string
+}
 
 func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "This is the home page for Rohans website")
+	index_template, err := template.ParseFiles("templates/home.html")
+
+	if err != nil {
+		fmt.Println("Error parsing template: ", err)
+	}
+
+	index_template.Execute(w, HomePageData{Title: "Rohand Home Page"})
 }
 
 func RoutesHandler() {
