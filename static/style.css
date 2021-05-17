@@ -148,7 +148,10 @@ a:hover {
     width: 800px;
     margin: 100px auto;
 }
-
+.table-class tr td {
+    border-collapse: collapse;
+    border: 5px solid black;
+}
 /* 
 =====================================================
 	Dynamic Displays

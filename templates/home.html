@@ -19,10 +19,22 @@
 			<img src="./static/images/hello.jpeg" alt="Rohans Hello" />
 		</p>
 		<p>
-			<img src="https://cataas.com/cat/gif" alt="New Cat Gif"><br>
+			<img src="https://cataas.com/cat/cute" alt="New Cat Gif"><br>
 			<a href="./">Reload to get a new gif</a>
 		</p>
-		
+		<p>
+			<table class="table-class">
+				<tr>
+					<th>Cat Names</th>
+				</tr>
+				{{range $cat := .Cats }}
+				<tr>
+					<td>{{ $cat.Name }}</td>
+				</tr>
+				{{end}}
+
+			</table>
+		</p>
 
 	</div>
 </body>
