@@ -12,9 +12,10 @@ type HomePageData struct {
 }
 
 func IndexHanlder(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is the home page for Rohans website")
-	index_template, err := template.ParseFiles("templates/home.html")
 
+	index_template, err := template.ParseFiles("./templates/home.html")
+
+	fmt.Println("Staring to parse the template templates/home.html")
 	if err != nil {
 		fmt.Println("Error parsing template: ", err)
 	}
