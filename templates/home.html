@@ -32,7 +32,27 @@
 					<td>{{ $cat.Name }}</td>
 				</tr>
 				{{end}}
+			</table>
+		</p>
 
+		<p>
+			<table class="table-class">
+				<tr>
+					<th>ID</th>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Price</th>
+				</tr>
+				{{range $book := .Books }}
+				<tr>
+					<td>{{ $book.Id }}</td>
+					<td>{{ $book.Isbn }}</td>
+					<td>{{ $book.Title }}</td>
+					<td>{{ $book.Author }}</td>
+					<td>{{ $book.Price }}</td>
+				</tr>
+				{{end}}
 			</table>
 		</p>
 

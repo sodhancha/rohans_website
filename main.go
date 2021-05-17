@@ -1,11 +1,9 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/sodhancha/rohans_website/model"
 	"github.com/sodhancha/rohans_website/router"
 )
 
@@ -21,22 +19,9 @@ import (
 * Render the API first content in the dynamic web pages
  */
 
-var DB *sql.DB
-
-func GetDBConnection() {
-	db, err := sql.Open("sqlite3", "./DB/foo.db")
-
-	if err != nil {
-		fmt.Println("DB connection failed: ", err)
-	}
-	DB = db
-}
-
 func main() {
 	fmt.Println("Starting Rohans Website")
 
-	GetDBConnection()
-	model.GetAllBooks(DB)
 	//Remember that Go Lang requires exported functions to have Capital Case Names
 	router.RoutesHandler()
 	router.BuildServer()

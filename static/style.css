@@ -148,9 +148,9 @@ a:hover {
     width: 800px;
     margin: 100px auto;
 }
-.table-class tr td {
+.table-class tr,td,th {
     border-collapse: collapse;
-    border: 5px solid black;
+    border: 1px solid black;
 }
 /* 
 =====================================================

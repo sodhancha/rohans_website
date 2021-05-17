@@ -5,11 +5,14 @@ import (
 	"net/http"
 	"os"
 	"text/template"
+
+	"github.com/sodhancha/rohans_website/model"
 )
 
 type HomePageData struct {
 	Title string
 	Cats  []CatData
+	Books []model.BookData
 }
 
 type CatData struct {
@@ -33,7 +36,10 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error parsing template: ", err)
 	}
 
-	index_template.Execute(w, HomePageData{Title: "Home Page YO!", Cats: CatsCollection()})
+	model.GetDBConnection()
+	books := model.GetAllBooks(model.DB)
+
+	index_template.Execute(w, HomePageData{Title: "Home Page YO!", Cats: CatsCollection(), Books: books})
 }
 
 func RoutesHandler() {
