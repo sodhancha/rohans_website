@@ -21,5 +21,9 @@
 # To Run:
   `go run main.go`
 
+# Or if you want to run a compiled file
+  1. `go build .`
+  2. `./rohans_website`
+
 # References:
 [Go Lang Website](https://golang.org/)
