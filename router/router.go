@@ -9,6 +9,19 @@ import (
 
 type HomePageData struct {
 	Title string
+	Cats  []CatData
+}
+
+type CatData struct {
+	Name string
+}
+
+func CatsCollection() []CatData {
+	var cats []CatData
+	cats = append(cats, CatData{Name: "Garfiled"})
+	cats = append(cats, CatData{Name: "Seinfield"})
+	cats = append(cats, CatData{Name: "Cat 3"})
+	return cats
 }
 
 func IndexHanlder(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +33,7 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error parsing template: ", err)
 	}
 
-	index_template.Execute(w, HomePageData{Title: "Rohand Home Page"})
+	index_template.Execute(w, HomePageData{Title: "Home Page YO!", Cats: CatsCollection()})
 }
 
 func RoutesHandler() {

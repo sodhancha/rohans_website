@@ -135,6 +135,14 @@ html[xmlns] .clearfix {
 =====================================================
 	Layout & Framework
 ===================================================== */
+a {
+    color: red;
+    padding: 2px;
+}
+a:hover {
+    color: white;
+    background: grey;
+}
 
 .container {
     width: 800px;
