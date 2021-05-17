@@ -10,7 +10,7 @@
 
   4. Make a DB Connector - DONE
 
-  5. Make a dynamic page which renders SQL output
+  5. Make a dynamic page which renders SQL output - DONE
 
   6. Make an admin panel where the dynamic content can be updated from
 
@@ -18,6 +18,8 @@
 
   8. Render the API first content in the dynamic web pages
 
+# To Run:
+  `go run main.go`
 
 # References:
 [Go Lang Website](https://golang.org/)
