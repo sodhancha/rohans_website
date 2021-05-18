@@ -15,6 +15,33 @@
 <body>
 	<div class="container">
 		<h1>This is the home page for Rohan's <a href="./">website</a></h1>
+
+		<p>
+			<table class="table-class">
+				<tr>
+					<th>ID</th>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+				{{range $book := .Books }}
+				<tr>
+					<td>{{ $book.Id }}</td>
+					<td>{{ $book.Isbn }}</td>
+					<td>{{ $book.Title }}</td>
+					<td>{{ $book.Author }}</td>
+					<td>{{ $book.Price }}</td>
+					<td>
+						<a href="./book/edit/{{ $book.Id }}">Edit</a> / 
+						<a href="./book/delete/{{ $book.Id }}">Delete</a>
+					</td>
+				</tr>
+				{{end}}
+			</table>
+		</p>
+
 		<p>
 			<img src="./static/images/hello.jpeg" alt="Rohans Hello" />
 		</p>
@@ -35,26 +62,7 @@
 			</table>
 		</p>
 
-		<p>
-			<table class="table-class">
-				<tr>
-					<th>ID</th>
-					<th>ISBN</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Price</th>
-				</tr>
-				{{range $book := .Books }}
-				<tr>
-					<td>{{ $book.Id }}</td>
-					<td>{{ $book.Isbn }}</td>
-					<td>{{ $book.Title }}</td>
-					<td>{{ $book.Author }}</td>
-					<td>{{ $book.Price }}</td>
-				</tr>
-				{{end}}
-			</table>
-		</p>
+		
 
 	</div>
 </body>
