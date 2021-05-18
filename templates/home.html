@@ -34,8 +34,8 @@
 					<td>{{ $book.Author }}</td>
 					<td>{{ $book.Price }}</td>
 					<td>
-						<a href="./book/edit/{{ $book.Id }}">Edit</a> / 
-						<a href="./book/delete/{{ $book.Id }}">Delete</a>
+						<a href="./book/edit/?id={{ $book.Id }}">Edit</a> / 
+						<a href="./book/delete/?id={{ $book.Id }}">Delete</a>
 					</td>
 				</tr>
 				{{end}}

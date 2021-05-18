@@ -5,12 +5,30 @@ import (
 	"fmt"
 )
 
+var Id int
+var Isbn string
+var Title string
+var Author string
+var Price float64
+
 type BookData struct {
 	Id     int
 	Isbn   string
 	Title  string
 	Author string
 	Price  float64
+}
+
+func GetBookById(id string, DB *sql.DB) {
+
+	fmt.Println("ID of the book: ", id)
+
+	DB.QueryRow("SELECT * FROM books WHERE id=?", id).Scan(&Id, &Isbn, &Title, &Author, &Price)
+
+	book := BookData{Id: Id, Isbn: Isbn, Title: Title, Author: Author, Price: Price}
+
+	fmt.Println(book)
+
 }
 
 func GetAllBooks(DB *sql.DB) []BookData {
@@ -27,12 +45,6 @@ func GetAllBooks(DB *sql.DB) []BookData {
 	defer DB.Close()
 
 	for rows.Next() {
-
-		var Id int
-		var Isbn string
-		var Title string
-		var Author string
-		var Price float64
 
 		err := rows.Scan(&Id, &Isbn, &Title, &Author, &Price)
 

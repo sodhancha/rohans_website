@@ -42,12 +42,22 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 	index_template.Execute(w, HomePageData{Title: "Home Page YO!", Cats: CatsCollection(), Books: books})
 }
 
+func EditHandler(w http.ResponseWriter, r *http.Request) {
+
+	id := r.URL.Query().Get("id")
+	model.GetDBConnection()
+	model.GetBookById(id, model.DB)
+
+	fmt.Fprintf(w, "This is the edit page: "+id)
+}
+
 func RoutesHandler() {
 
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static", fileServer))
 
 	http.HandleFunc("/", IndexHanlder)
+	http.HandleFunc("/book/edit/", EditHandler)
 }
 
 func BuildServer() {
