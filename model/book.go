@@ -19,7 +19,7 @@ type BookData struct {
 	Price  float64
 }
 
-func GetBookById(id string, DB *sql.DB) {
+func GetBookById(id string, DB *sql.DB) BookData {
 
 	fmt.Println("ID of the book: ", id)
 
@@ -33,7 +33,7 @@ func GetBookById(id string, DB *sql.DB) {
 
 	book := BookData{Id: Id, Isbn: Isbn, Title: Title, Author: Author, Price: Price}
 
-	fmt.Println(book)
+	return book
 
 }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{ .Title }} - Rohans Website</title>
+	<link rel="stylesheet" href="./static/style.css">
+	<!--Additional elements for browsers and robots go here goes here-->
+
+</head>
+
+<body>
+	<div class="container">
+		<h1> This is the book edit page. If you are lost click the right link: </h1><a href="/">website</a></h1>
+
+		<p>
+			<table class="table-class">
+				<tr>
+					<th>ID</th>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+				{{range $book := .Books }}
+				<tr>
+					<td>{{ $book.Id }}</td>
+					<td>{{ $book.Isbn }}</td>
+					<td>{{ $book.Title }}</td>
+					<td>{{ $book.Author }}</td>
+					<td>{{ $book.Price }}</td>
+					<td>
+						<a href="./book/edit/?id={{ $book.Id }}">Edit</a> / 
+						<a href="./book/delete/?id={{ $book.Id }}">Delete</a>
+					</td>
+				</tr>
+				{{end}}
+			</table>
+		</p>		
+
+	</div>
+</body>
+
+</html>

@@ -13,6 +13,7 @@ type HomePageData struct {
 	Title string
 	Cats  []CatData
 	Books []model.BookData
+	Book  model.BookData
 }
 
 type CatData struct {
@@ -31,10 +32,11 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 
 	index_template, err := template.ParseFiles("./templates/home.html")
 
-	fmt.Println("Staring to parse the template templates/home.html")
 	if err != nil {
 		fmt.Println("Error parsing template: ", err)
 	}
+
+	fmt.Println("Staring to parse the template templates/home.html")
 
 	model.GetDBConnection()
 	books := model.GetAllBooks(model.DB)
@@ -44,11 +46,17 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 
 func EditHandler(w http.ResponseWriter, r *http.Request) {
 
+	book_template, err := template.ParseFiles("./templates/book.html")
+
+	if err != nil {
+		fmt.Println("Error parsing template: ", err)
+	}
+
 	id := r.URL.Query().Get("id")
 	model.GetDBConnection()
-	model.GetBookById(id, model.DB)
+	book := model.GetBookById(id, model.DB)
 
-	fmt.Fprintf(w, "This is the edit page: "+id)
+	book_template.Execute(w, HomePageData{Title: "Book Edit Page", Book: book})
 }
 
 func RoutesHandler() {
