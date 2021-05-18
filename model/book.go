@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"fmt"
+	"os"
 )
 
 var Id int
@@ -23,7 +24,17 @@ func GetBookById(id string, DB *sql.DB) {
 
 	fmt.Println("ID of the book: ", id)
 
-	DB.QueryRow("SELECT * FROM books WHERE id=?", id).Scan(&Id, &Isbn, &Title, &Author, &Price)
+	row, err := DB.QueryRow("SELECT * FROM books WHERE id=?", id)
+
+	if err != nil {
+		os.Exit(0)
+	}
+
+	err = row.Scan(&Id, &Isbn, &Title, &Author, &Price)
+
+	if err != nil {
+		fmt.Println("DB Error: ", err)
+	}
 
 	book := BookData{Id: Id, Isbn: Isbn, Title: Title, Author: Author, Price: Price}
 
