@@ -19,7 +19,7 @@
 		<p>
 			<fieldset>
 				<legend>Edit a Book</legend>
-				<form action="">
+				<form action="/book/update/" method="POST">
 					<input type="hidden" name="id" value="{{ .Book.Id }}">
 					<p>
 						<label for="">ISBN</label>
@@ -27,7 +27,7 @@
 					</p>
 					<p>
 						<label for="">Book Name</label>
-						<input type="text" name="name" value="{{ .Book.Title }}" required>
+						<input type="text" name="title" value="{{ .Book.Title }}" required>
 					</p>
 					<p>
 						<label for="">Price</label>

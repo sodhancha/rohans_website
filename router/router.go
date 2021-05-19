@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 	"text/template"
 
 	"github.com/sodhancha/rohans_website/model"
@@ -60,7 +61,32 @@ func EditHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Updated form")
+
+	var book model.BookData
+	var err error
+
+	book.Id, err = strconv.Atoi(r.PostFormValue("id"))
+
+	if err != nil {
+		fmt.Println("There was an error parsing Form values", err)
+	}
+
+	book.Isbn = r.PostFormValue("isbn")
+	book.Title = r.PostFormValue("title")
+	book.Price, err = strconv.ParseFloat(r.PostFormValue("price"), 32)
+	book.Author = r.PostFormValue("author")
+
+	if err != nil {
+		fmt.Println("There was an error parsing Form values", err)
+	}
+
+	model.GetDBConnection()
+	model.UpdateBookById(book, model.DB)
+
+	edit_id := fmt.Sprint(book.Id)
+
+	http.Redirect(w, r, "/book/edit/?id="+edit_id, http.StatusPermanentRedirect)
+
 }
 
 func RoutesHandler() {

@@ -19,6 +19,22 @@ type BookData struct {
 	Price  float64
 }
 
+func UpdateBookById(book BookData, DB *sql.DB) {
+
+	sql_stmt := "UPDATE books SET isbn=?, title=?, author=?, price=? WHERE id=?"
+
+	rows, err := DB.Query(sql_stmt, book.Isbn, book.Title, book.Author, book.Price, book.Id)
+
+	if err != nil {
+		fmt.Println("Error in updating SQL: ", err)
+	}
+
+	for rows.Next() {
+		rows.Scan()
+	}
+
+}
+
 func GetBookById(id string, DB *sql.DB) BookData {
 
 	fmt.Println("ID of the book: ", id)
