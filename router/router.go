@@ -59,6 +59,10 @@ func EditHandler(w http.ResponseWriter, r *http.Request) {
 	book_template.Execute(w, HomePageData{Title: "Book Edit Page", Book: book})
 }
 
+func UpdateHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Updated form")
+}
+
 func RoutesHandler() {
 
 	fileServer := http.FileServer(http.Dir("./static"))
@@ -66,6 +70,7 @@ func RoutesHandler() {
 
 	http.HandleFunc("/", IndexHanlder)
 	http.HandleFunc("/book/edit/", EditHandler)
+	http.HandleFunc("/book/update/", UpdateHandler)
 }
 
 func BuildServer() {
