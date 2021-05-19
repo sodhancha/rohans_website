@@ -7,39 +7,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>{{ .Title }} - Rohans Website</title>
-	<link rel="stylesheet" href="./static/style.css">
+	<link rel="stylesheet" href="/static/style.css">
 	<!--Additional elements for browsers and robots go here goes here-->
 
 </head>
 
 <body>
 	<div class="container">
-		<h1> This is the book edit page. If you are lost click the right link: </h1><a href="/">website</a></h1>
+		<h1> This is the book edit page. If you are lost click the right link: <a href="/">website</a></h1>
 
 		<p>
-			<table class="table-class">
-				<tr>
-					<th>ID</th>
-					<th>ISBN</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Price</th>
-					<th>Action</th>
-				</tr>
-				{{range $book := .Books }}
-				<tr>
-					<td>{{ $book.Id }}</td>
-					<td>{{ $book.Isbn }}</td>
-					<td>{{ $book.Title }}</td>
-					<td>{{ $book.Author }}</td>
-					<td>{{ $book.Price }}</td>
-					<td>
-						<a href="./book/edit/?id={{ $book.Id }}">Edit</a> / 
-						<a href="./book/delete/?id={{ $book.Id }}">Delete</a>
-					</td>
-				</tr>
-				{{end}}
-			</table>
+			<fieldset>
+				<legend>Edit a Book</legend>
+				<form action="">
+					<input type="hidden" name="id" value="{{ .Book.Id }}">
+					<p>
+						<label for="">ISBN</label>
+						<input type="text" name="isbn" value="{{ .Book.Isbn }}" required>
+					</p>
+					<p>
+						<label for="">Book Name</label>
+						<input type="text" name="name" value="{{ .Book.Title }}" required>
+					</p>
+					<p>
+						<label for="">Price</label>
+						<input type="text" name="price" value="{{ .Book.Price }}" required>
+					</p>
+
+					<p>
+						<label for="">Author</label>
+						<input type="text" name="author" value="{{ .Book.Author }}" required>
+					</p>
+					<p>
+						<input type="submit" name="submit_book">
+					</p>
+				</form>
+			</fieldset>
 		</p>		
 
 	</div>
