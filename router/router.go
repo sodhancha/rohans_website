@@ -133,7 +133,7 @@ func RoutesHandler() {
 
 func BuildServer() {
 
-	err := http.ListenAndServe(":8001", nil)
+	err := http.ListenAndServe(":8002", nil)
 
 	if err != nil {
 		fmt.Println("Exited due to error", err)
