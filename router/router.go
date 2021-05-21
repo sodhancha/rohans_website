@@ -58,8 +58,8 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Error parsing request params")
 	}
 
-	fmt.Fprintf(w, book_id)
-
+	model.GetDBConnection()
+	model.DeleteBookById(id, model.DB)
 }
 
 func EditHandler(w http.ResponseWriter, r *http.Request) {
