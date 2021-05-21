@@ -45,6 +45,12 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 	index_template.Execute(w, HomePageData{Title: "Home Page YO!", Cats: CatsCollection(), Books: books})
 }
 
+func DeleteHandler(w http.ResponseWriter, r *http.Request) {
+
+	id := r.URL.Query().Get("id")
+	fmt.Fprintf(w, id)
+}
+
 func EditHandler(w http.ResponseWriter, r *http.Request) {
 
 	book_template, err := template.ParseFiles("./templates/book.html")
@@ -97,6 +103,7 @@ func RoutesHandler() {
 	http.HandleFunc("/", IndexHanlder)
 	http.HandleFunc("/book/edit/", EditHandler)
 	http.HandleFunc("/book/update/", UpdateHandler)
+	http.HandleFunc("/book/delete/", DeleteHandler)
 }
 
 func BuildServer() {
