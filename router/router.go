@@ -47,8 +47,19 @@ func IndexHanlder(w http.ResponseWriter, r *http.Request) {
 
 func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 
+	var err error
+	var book_id int
+
 	id := r.URL.Query().Get("id")
-	fmt.Fprintf(w, id)
+
+	book_id, err = strconv.Atoi(id)
+
+	if err != nil {
+		fmt.Fprintf(w, "Error parsing request params")
+	}
+
+	fmt.Fprintf(w, book_id)
+
 }
 
 func EditHandler(w http.ResponseWriter, r *http.Request) {
