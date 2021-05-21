@@ -85,9 +85,13 @@ func GetAllBooks(DB *sql.DB) []BookData {
 	return books
 }
 
-func DeleteBookById(id, DB *sql.DB) {
+func DeleteBookById(id int, DB *sql.DB) {
 
-	is_deleted := DB.QueryRow("DELETE FROM book WHERE id=?", id)
+	is_deleted, err := DB.Query("DELETE FROM books WHERE id=?", id)
+
+	if err != nil {
+		fmt.Println("Error deleting row in Books: ", err)
+	}
 
 	fmt.Println(is_deleted.Err().Error())
 

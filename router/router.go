@@ -59,7 +59,7 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	model.GetDBConnection()
-	model.DeleteBookById(id, model.DB)
+	model.DeleteBookById(book_id, model.DB)
 }
 
 func EditHandler(w http.ResponseWriter, r *http.Request) {
