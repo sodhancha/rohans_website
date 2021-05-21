@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{ .Title }} - Rohans Website</title>
+	<link rel="stylesheet" href="/static/style.css">
+	<!--Additional elements for browsers and robots go here goes here-->
+
+</head>
+
+<body>
+	<div class="container">
+		<h1> This is the book add page. If you are lost click the right link: <a href="/">website</a></h1>
+
+		<p>
+			<fieldset>
+				<legend>Add a new Book</legend>
+				<form action="/book/add/" method="POST">
+					<p>
+						<label for="">ISBN</label>
+						<input type="text" name="isbn" value="" required>
+					</p>
+					<p>
+						<label for="">Book Name</label>
+						<input type="text" name="title" value="" required>
+					</p>
+					<p>
+						<label for="">Price</label>
+						<input type="text" name="price" value="" required>
+					</p>
+
+					<p>
+						<label for="">Author</label>
+						<input type="text" name="author" value="" required>
+					</p>
+					<p>
+						<input type="submit" name="submit_book">
+					</p>
+				</form>
+			</fieldset>
+		</p>		
+
+	</div>
+</body>
+
+</html>

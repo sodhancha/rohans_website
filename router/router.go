@@ -64,6 +64,17 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 }
 
+func AddNewHandler(w http.ResponseWriter, r *http.Request) {
+
+	add_template, err := template.ParseFiles("./templates/addnew.html")
+
+	if err != nil {
+		fmt.Println("Error parsing template: ", err)
+	}
+
+	add_template.Execute(w, HomePageData{Title: "Book Add"})
+}
+
 func EditHandler(w http.ResponseWriter, r *http.Request) {
 
 	book_template, err := template.ParseFiles("./templates/book.html")
@@ -117,6 +128,7 @@ func RoutesHandler() {
 	http.HandleFunc("/book/edit/", EditHandler)
 	http.HandleFunc("/book/update/", UpdateHandler)
 	http.HandleFunc("/book/delete/", DeleteHandler)
+	http.HandleFunc("/book/new/", AddNewHandler)
 }
 
 func BuildServer() {
