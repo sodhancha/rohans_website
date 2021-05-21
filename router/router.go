@@ -60,6 +60,8 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 
 	model.GetDBConnection()
 	model.DeleteBookById(book_id, model.DB)
+
+	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 }
 
 func EditHandler(w http.ResponseWriter, r *http.Request) {
