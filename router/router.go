@@ -147,6 +147,10 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func AdminHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "This is the admin page which is currently not secure")
+}
+
 func RoutesHandler() {
 
 	fileServer := http.FileServer(http.Dir("./static"))
@@ -158,6 +162,8 @@ func RoutesHandler() {
 	http.HandleFunc("/book/delete/", DeleteHandler)
 	http.HandleFunc("/book/new/", AddNewHandler)
 	http.HandleFunc("/book/insert/", InsertHandler)
+	http.HandleFunc("/admin/", AdminHandler)
+
 }
 
 func BuildServer() {
