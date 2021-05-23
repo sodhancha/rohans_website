@@ -21,12 +21,12 @@ type BookData struct {
 
 func InsertNewBook(book BookData, DB *sql.DB) {
 
-	sql_stmt := "UPDATE books SET isbn=?, title=?, author=?, price=? WHERE id=?"
+	sql_stmt := "INSERT INTO books (isbn,title,author,price) VALUES (?, ?, ?, ?)"
 
 	rows, err := DB.Query(sql_stmt, book.Isbn, book.Title, book.Author, book.Price, book.Id)
 
 	if err != nil {
-		fmt.Println("Error in updating SQL: ", err)
+		fmt.Println("Error in inserting SQL: ", err)
 	}
 
 	for rows.Next() {
