@@ -84,6 +84,7 @@ func InsertHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("There was an error parsing Form values", err)
 	}
 
+	//you will get a memory address error if this is not called since model.DB will not know which DB to connect to
 	model.GetDBConnection()
 	model.InsertNewBook(book, model.DB)
 
@@ -136,6 +137,7 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("There was an error parsing Form values", err)
 	}
 
+	//you will get a memory address error if this is not called since model.DB will not know which DB to connect to
 	model.GetDBConnection()
 	model.UpdateBookById(book, model.DB)
 
