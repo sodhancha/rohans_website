@@ -64,7 +64,24 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 }
 
-func AddNewHandler(w http.ResponseWriter, r *http.Request) {
+func AddPostHandler(w http.ResponseWriter, r *http.Request) {
+
+	var book model.BookData
+	var err error
+
+	book.Isbn = r.PostFormValue("isbn")
+	book.Title = r.PostFormValue("title")
+	book.Price, err = strconv.ParseFloat(r.PostFormValue("price"), 32)
+	book.Author = r.PostFormValue("author")
+
+	if err != nil {
+		fmt.Fprintf(w, "Error adding new price")
+	}
+
+	model.InsertNewBook(book, model.DB)
+}
+
+func InsertHandler(w http.ResponseWriter, r *http.Request) {
 
 	add_template, err := template.ParseFiles("./templates/addnew.html")
 
@@ -128,7 +145,8 @@ func RoutesHandler() {
 	http.HandleFunc("/book/edit/", EditHandler)
 	http.HandleFunc("/book/update/", UpdateHandler)
 	http.HandleFunc("/book/delete/", DeleteHandler)
-	http.HandleFunc("/book/new/", AddNewHandler)
+	http.HandleFunc("/book/new/", InsertHandler)
+	http.HandleFunc("/book/insert/", InsertHandler)
 }
 
 func BuildServer() {
