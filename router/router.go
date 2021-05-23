@@ -149,6 +149,8 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 
 func AdminHandler(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("Content-Type", "text/html")
+
 	admin_cookie := http.Cookie{
 		Name:  "is_logged_in",
 		Value: "TRUE",
@@ -165,22 +167,26 @@ func CookieProtected(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
 	c, err := r.Cookie("is_logged_in")
+
 	if err != nil {
 		http.Error(w, http.StatusText(400), http.StatusBadRequest)
 		return
 	}
 
-	if c.Value != "FALSE" {
+	fmt.Println(c.Value)
+
+	if c.Value == "TRUE" {
 		fmt.Fprintln(w, "YOUR COOKIE:", c)
 		fmt.Fprintf(w, "<a href='/logout/'>Logout</a>")
+	} else {
+		http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 	}
-
-	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 
 }
 
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	admin_cookie := http.Cookie{
 		Name:  "is_logged_in",
 		Value: "FALSE",
@@ -189,6 +195,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &admin_cookie)
 
 	fmt.Fprintf(w, "Cookie is logged out has been set.")
+	fmt.Fprintf(w, " Go to home page: <a href='/'>Home Page</a>")
 }
 
 func RoutesHandler() {
