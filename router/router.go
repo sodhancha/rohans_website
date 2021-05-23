@@ -148,7 +148,47 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func AdminHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is the admin page which is currently not secure")
+
+	admin_cookie := http.Cookie{
+		Name:  "is_logged_in",
+		Value: "TRUE",
+		Path:  "/",
+	}
+	http.SetCookie(w, &admin_cookie)
+
+	fmt.Fprintf(w, "Cookie is logged in has been set.")
+	fmt.Fprintf(w, "<a href='/cookie_protected/'>You can now go to Cookie protected page</a>")
+}
+
+func CookieProtected(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	c, err := r.Cookie("is_logged_in")
+	if err != nil {
+		http.Error(w, http.StatusText(400), http.StatusBadRequest)
+		return
+	}
+
+	if c.Value != "FALSE" {
+		fmt.Fprintln(w, "YOUR COOKIE:", c)
+		fmt.Fprintf(w, "<a href='/logout/'>Logout</a>")
+	}
+
+	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
+
+}
+
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+
+	admin_cookie := http.Cookie{
+		Name:  "is_logged_in",
+		Value: "FALSE",
+		Path:  "/",
+	}
+	http.SetCookie(w, &admin_cookie)
+
+	fmt.Fprintf(w, "Cookie is logged out has been set.")
 }
 
 func RoutesHandler() {
@@ -163,6 +203,8 @@ func RoutesHandler() {
 	http.HandleFunc("/book/new/", AddNewHandler)
 	http.HandleFunc("/book/insert/", InsertHandler)
 	http.HandleFunc("/admin/", AdminHandler)
+	http.HandleFunc("/cookie_protected/", CookieProtected)
+	http.HandleFunc("/logout/", LogoutHandler)
 
 }
 
