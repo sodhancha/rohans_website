@@ -14,6 +14,7 @@ import (
 * Make a Routes handler - DONE
 * Make a DB Connector - DONE
 * Make a dynamic page which renders SQL output - DONE
+* Do a CRUD - DONE
 * Make an admin panel where the dynamic content can be updated from
 * Build a RESTFul API for the Backend Content
 * Render the API first content in the dynamic web pages
