@@ -19,19 +19,21 @@ type BookData struct {
 	Price  float64
 }
 
-func InsertNewBook(book BookData, DB *sql.DB) {
+func InsertNewBook(book BookData, DB *sql.DB) int64 {
 
-	sql_stmt := "INSERT INTO books (isbn,title,author,price) VALUES (?, ?, ?, ?)"
-
-	rows, err := DB.Query(sql_stmt, book.Isbn, book.Title, book.Author, book.Price, book.Id)
+	rows, err := DB.Exec("INSERT INTO books (isbn,title,author,price) VALUES (?,?,?,?)", book.Isbn, book.Title, book.Author, book.Price)
 
 	if err != nil {
-		fmt.Println("Error in inserting SQL: ", err)
+		fmt.Println(err)
 	}
 
-	for rows.Next() {
-		rows.Scan()
+	is_inserted, err := rows.RowsAffected()
+
+	if err != nil {
+		fmt.Println(err)
 	}
+
+	return is_inserted
 
 }
 

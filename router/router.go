@@ -69,16 +69,25 @@ func InsertHandler(w http.ResponseWriter, r *http.Request) {
 	var book model.BookData
 	var err error
 
+	book.Id = 1000
+
+	if err != nil {
+		fmt.Println("There was an error parsing Form values", err)
+	}
+
 	book.Isbn = r.PostFormValue("isbn")
 	book.Title = r.PostFormValue("title")
 	book.Price, err = strconv.ParseFloat(r.PostFormValue("price"), 32)
 	book.Author = r.PostFormValue("author")
 
 	if err != nil {
-		fmt.Fprintf(w, "Error adding new price")
+		fmt.Println("There was an error parsing Form values", err)
 	}
 
+	model.GetDBConnection()
 	model.InsertNewBook(book, model.DB)
+
+	http.Redirect(w, r, "/", http.StatusPermanentRedirect)
 }
 
 func AddNewHandler(w http.ResponseWriter, r *http.Request) {
