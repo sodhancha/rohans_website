@@ -16,8 +16,8 @@ import (
 * Make a dynamic page which renders SQL output - DONE
 * Do a CRUD - DONE
 * Make an admin panel where the dynamic content can be updated from - DONE
-* Build a RESTFul API for the Backend Content
-* Render the API first content in the dynamic web pages
+* Build a RESTFul API for the Backend Content - Skipping and sending to different project with learnings
+* Render the API first content in the dynamic web pages  - Skipping and sending to different project with learnings
  */
 
 func main() {
